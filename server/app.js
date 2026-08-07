@@ -1,18 +1,21 @@
 import express from "express";
 import cors from "cors";
 
+import routes from "./routes/index.js";
+import notFound from "./middleware/notFound.js";
+import errorHandler from "./middleware/errorHandler.js";
+
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Health Check Route
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "LedgerGuard API is running 🚀"
-  });
-});
+app.use("/api/v1", routes);
+
+// 404 Middleware
+app.use(notFound);
+
+// Global Error Handler
+app.use(errorHandler);
 
 export default app;
