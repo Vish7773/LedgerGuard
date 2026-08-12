@@ -1,3 +1,4 @@
+import { createTenant } from "../services/tenantService.js";
 import Organization from "../models/Organization.js";
 import { sendResponse } from "../utils/response.js";
 
@@ -47,14 +48,18 @@ const createOrganization = async (req, res) => {
     slug,
     databaseName,
   });
+  const tenant = await createTenant(organization);
 
-  return sendResponse(
-    res,
-    201,
-    true,
-    "Organization created successfully",
-    organization
-  );
+ return sendResponse(
+  res,
+  201,
+  true,
+  "Organization created successfully",
+  {
+    organization,
+    tenant,
+  }
+);
 };
 
 export { createOrganization };
