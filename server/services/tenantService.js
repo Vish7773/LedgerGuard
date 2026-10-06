@@ -1,4 +1,5 @@
 import Tenant from "../models/Tenant.js";
+import getTenantConnection from "../database/tenantConnection.js";
 
 const createTenant = async (organization) => {
   const existingTenant = await Tenant.findOne({
