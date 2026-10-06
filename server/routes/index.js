@@ -1,6 +1,7 @@
 import express from "express";
 import { sendResponse } from "../utils/response.js";
 import organizationRoutes from "./organizationRoutes.js";
+import invoiceRoutes from "./invoiceRoutes.js";
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.get("/", (req, res) => {
 });
 
 router.use("/organizations", organizationRoutes);
+router.use("/invoices", invoiceRoutes);
 
 export default router;
